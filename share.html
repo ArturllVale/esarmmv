@@ -1,0 +1,247 @@
+<html>
+    <head>
+        <link rel="icon" href="icon/icon.png" type="image/png">
+        <link rel="apple-touch-icon" href="icon/icon.png">
+        <link rel="stylesheet" type="text/css" href="fonts/gamefont.css">
+        <title>Editor de Sequência de Ação</title>
+        <script src="https://www.gstatic.com/firebasejs/4.0.0/firebase.js"></script>
+        <script>
+        // Initialize Firebase
+        var config = {
+        apiKey: "AIzaSyAf-mdwS3JzkUK7-SnmQs5rZkLBOGPDCbM",
+        authDomain: "actionsequenceeditor.firebaseapp.com",
+        databaseURL: "https://actionsequenceeditor.firebaseio.com",
+        projectId: "actionsequenceeditor",
+        storageBucket: "actionsequenceeditor.appspot.com",
+        messagingSenderId: "35333754956"
+        };
+        firebase.initializeApp(config);
+        </script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="cmlib/lib/codemirror.css">
+        <link rel="stylesheet" href="cmlib/addon/hint/show-hint.css">
+        <link rel="stylesheet" href="cmlib/addon/scroll/simplescrollbars.css">
+        <link rel="stylesheet" href="cmlib/addon/search/matchesonscrollbar.css">
+        <link rel="stylesheet" href="cmlib/addon/dialog/dialog.css">
+        <link rel="stylesheet" href="cmlib/addon/fold/foldgutter.css">
+        <link rel="stylesheet" href="cmlib/addon/display/fullscreen.css">
+        <script src="cmlib/lib/codemirror.js"></script>
+        <script src="cmlib/addon/mode/simple.js"></script>
+        <script src="cmlib/addon/hint/show-hint.js"></script>
+        <script src="cmlib/addon/hint/anyword-hint.js"></script>
+        <script src="cmlib/addon/search/match-highlighter.js"></script>
+        <script src="cmlib/addon/scroll/simplescrollbars.js"></script>
+        <script src="cmlib/addon/selection/active-line.js"></script>
+        <script src="cmlib/addon/edit/closebrackets.js"></script>
+        <script src="cmlib/addon/fold/foldcode.js"></script>
+        <script src="cmlib/addon/fold/foldgutter.js"></script>
+        <script src="cmlib/addon/fold/brace-fold.js"></script>
+        <script src="cmlib/addon/fold/xml-fold.js"></script>
+        <script src="cmlib/addon/fold/indent-fold.js"></script>
+        <script src="cmlib/addon/dialog/dialog.js"></script>
+        <script src="cmlib/addon/search/searchcursor.js"></script>
+        <script src="cmlib/addon/search/search.js"></script>
+        <script src="cmlib/addon/search/matchesonscrollbar.js"></script>
+        <script src="cmlib/addon/scroll/annotatescrollbar.js"></script>
+        <script src="cmlib/addon/display/fullscreen.js"></script>
+        <script src="cmlib/mode/simplemode/simplemode.js"></script>
+        <link rel="stylesheet" href="main.css">
+        <link rel="stylesheet" href="cmlib/theme/serge-light.css">
+        <link rel="stylesheet" href="cmlib/theme/serge-dark.css">
+        <link rel="stylesheet" href="cmlib/theme/3024-day.css">
+        <link rel="stylesheet" href="cmlib/theme/3024-night.css">
+        <link rel="stylesheet" href="cmlib/theme/abcdef.css">
+        <link rel="stylesheet" href="cmlib/theme/ambiance.css">
+        <link rel="stylesheet" href="cmlib/theme/base16-dark.css">
+        <link rel="stylesheet" href="cmlib/theme/bespin.css">
+        <link rel="stylesheet" href="cmlib/theme/base16-light.css">
+        <link rel="stylesheet" href="cmlib/theme/blackboard.css">
+        <link rel="stylesheet" href="cmlib/theme/cobalt.css">
+        <link rel="stylesheet" href="cmlib/theme/colorforth.css">
+        <link rel="stylesheet" href="cmlib/theme/dracula.css">
+        <link rel="stylesheet" href="cmlib/theme/duotone-dark.css">
+        <link rel="stylesheet" href="cmlib/theme/duotone-light.css">
+        <link rel="stylesheet" href="cmlib/theme/eclipse.css">
+        <link rel="stylesheet" href="cmlib/theme/elegant.css">
+        <link rel="stylesheet" href="cmlib/theme/erlang-dark.css">
+        <link rel="stylesheet" href="cmlib/theme/hopscotch.css">
+        <link rel="stylesheet" href="cmlib/theme/icecoder.css">
+        <link rel="stylesheet" href="cmlib/theme/isotope.css">
+        <link rel="stylesheet" href="cmlib/theme/lesser-dark.css">
+        <link rel="stylesheet" href="cmlib/theme/liquibyte.css">
+        <link rel="stylesheet" href="cmlib/theme/material.css">
+        <link rel="stylesheet" href="cmlib/theme/mbo.css">
+        <link rel="stylesheet" href="cmlib/theme/mdn-like.css">
+        <link rel="stylesheet" href="cmlib/theme/midnight.css">
+        <link rel="stylesheet" href="cmlib/theme/monokai.css">
+        <link rel="stylesheet" href="cmlib/theme/neat.css">
+        <link rel="stylesheet" href="cmlib/theme/neo.css">
+        <link rel="stylesheet" href="cmlib/theme/night.css">
+        <link rel="stylesheet" href="cmlib/theme/panda-syntax.css">
+        <link rel="stylesheet" href="cmlib/theme/paraiso-dark.css">
+        <link rel="stylesheet" href="cmlib/theme/paraiso-light.css">
+        <link rel="stylesheet" href="cmlib/theme/pastel-on-dark.css">
+        <link rel="stylesheet" href="cmlib/theme/railscasts.css">
+        <link rel="stylesheet" href="cmlib/theme/rubyblue.css">
+        <link rel="stylesheet" href="cmlib/theme/seti.css">
+        <link rel="stylesheet" href="cmlib/theme/solarized.css">
+        <link rel="stylesheet" href="cmlib/theme/the-matrix.css">
+        <link rel="stylesheet" href="cmlib/theme/tomorrow-night-bright.css">
+        <link rel="stylesheet" href="cmlib/theme/tomorrow-night-eighties.css">
+        <link rel="stylesheet" href="cmlib/theme/ttcn.css">
+        <link rel="stylesheet" href="cmlib/theme/twilight.css">
+        <link rel="stylesheet" href="cmlib/theme/vibrant-ink.css">
+        <link rel="stylesheet" href="cmlib/theme/xq-dark.css">
+        <link rel="stylesheet" href="cmlib/theme/xq-light.css">
+        <link rel="stylesheet" href="cmlib/theme/yeti.css">
+        <link rel="stylesheet" href="cmlib/theme/zenburn.css">
+        <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-100356395-1', 'auto');
+        ga('send', 'pageview');
+        </script>
+    </head>
+    <body style="margin: 0px; font-size: 12px;">
+        <div id="topNav">
+            <div class="dropdown">
+                <div class="dropdown-label">Editor</div>
+                <div class="dropdown-content">
+                    <label class="dropdown-item">Theme:
+                        <select id="themeSelector" onchange="changeTheme()">
+                            <option value="serge-light">Light</option>
+                            <option value="serge-dark">Dark</option>
+                            <option value="3024-day">3024-day</option>
+                            <option value="3024-night">3024-night</option>
+                            <option value="abcdef">abcdef</option>
+                            <option value="ambiance">ambiance</option>
+                            <option value="base16-dark">base16-dark</option>
+                            <option value="base16-light">base16-light</option>
+                            <option value="bespin">bespin</option>
+                            <option value="blackboard">blackboard</option>
+                            <option value="cobalt">cobalt</option>
+                            <option value="colorforth">colorforth</option>
+                            <option value="dracula">dracula</option>
+                            <option value="duotone-dark">duotone-dark</option>
+                            <option value="duotone-light">duotone-light</option>
+                            <option value="eclipse">eclipse</option>
+                            <option value="elegant">elegant</option>
+                            <option value="erlang-dark">erlang-dark</option>
+                            <option value="hopscotch">hopscotch</option>
+                            <option value="icecoder">icecoder</option>
+                            <option value="isotope">isotope</option>
+                            <option value="lesser-dark">lesser-dark</option>
+                            <option value="liquibyte">liquibyte</option>
+                            <option value="material">material</option>
+                            <option value="mbo">mbo</option>
+                            <option value="mdn-like">mdn-like</option>
+                            <option value="midnight">midnight</option>
+                            <option value="monokai">monokai</option>
+                            <option value="neat">neat</option>
+                            <option value="neo">neo</option>
+                            <option value="night">night</option>
+                            <option value="panda-syntax">panda-syntax</option>
+                            <option value="paraiso-dark">paraiso-dark</option>
+                            <option value="paraiso-light">paraiso-light</option>
+                            <option value="pastel-on-dark">pastel-on-dark</option>
+                            <option value="railscasts">railscasts</option>
+                            <option value="rubyblue">rubyblue</option>
+                            <option value="seti">seti</option>
+                            <option value="solarized dark">solarized dark</option>
+                            <option value="solarized light">solarized light</option>
+                            <option value="the-matrix">the-matrix</option>
+                            <option value="tomorrow-night-bright">tomorrow-night-bright</option>
+                            <option value="tomorrow-night-eighties">tomorrow-night-eighties</option>
+                            <option value="ttcn">ttcn</option>
+                            <option value="twilight">twilight</option>
+                            <option value="vibrant-ink">vibrant-ink</option>
+                            <option value="xq-dark">xq-dark</option>
+                            <option value="xq-light">xq-light</option>
+                            <option value="yeti">yeti</option>
+                            <option value="zenburn">zenburn</option>
+                        </select>
+                    </label>
+                    <div class="dropdown-item" onclick="toggleFullscreen();">Fullscreen</div>
+                </div>
+            </div>
+            <div class="dropdown">
+                <div class="dropdown-label">Preview</div>
+                <div class="dropdown-content">
+                    <div id="openPreviewButton" class="dropdown-item" onclick="previewHandler();">Open Preview</div>
+                    <div id="closePreviewButton" class="dropdown-item" onclick="closePreview();" style="display: none">Close Preview</div>
+                    <label class="dropdown-item">Background Music Volume
+                        <input id="bgmVol" type="range" step="10" max="100" min="0" onchange="volumeHandler();">
+                    </label>
+                    <label class="dropdown-item">Sound Effect Volume
+                        <input id="seVol" type="range" step="10" max="100" min="0" onchange="volumeHandler();">
+                    </label>
+                    <label class="dropdown-item">Music Effect Volume
+                        <input id="meVol" type="range" step="10" max="100" min="0" onchange="volumeHandler();">
+                    </label>
+                    <label class="dropdown-item">Background Sound Volume
+                        <input id="bgsVol" type="range" step="10" max="100" min="0" onchange="volumeHandler();">
+                    </label>
+                </div>
+            </div>
+            <div class="dropdown" style="display: none;" id="skillDropdown">
+                <div class="dropdown-label">Skill</div>
+                <div class="dropdown-content">
+                    <label class="dropdown-item">Scope
+                        <select id="skillScope">
+                            <option value="0">None</option>
+                            <option value="1" selected>1 Enemy</option>
+                            <option value="2">All Enemies</option>
+                            <option value="3">1 Random Enemy</option>
+                            <option value="4">2 Random Enemies</option>
+                            <option value="5">3 Random Enemies</option>
+                            <option value="6">4 Random Enemies</option>
+                            <option value="7">1 Ally</option>
+                            <option value="8">All Allies</option>
+                            <option value="9">1 Ally (Dead)</option>
+                            <option value="10">All Allies (Dead)</option>
+                            <option value="11">The User</option>
+                        </select>
+                    </label>
+                    <label class="dropdown-item">Damage Type
+                        <select id="skillDamageType">
+                            <option value="0">None</option>
+                            <option value="1" selected>HP Damage</option>
+                            <option value="2">MP Damage</option>
+                            <option value="3">HP Recover</option>
+                            <option value="4">MP Recover</option>
+                            <option value="5">HP Drain</option>
+                            <option value="6">MP Drain</option>
+                        </select>
+                    </label>
+                    <label class="dropdown-item">Animation ID
+                        <input value="-1" id="skillAnimation" type="number">
+                    </label>
+                    <label class="dropdown-item">Cast Animation ID
+                        <input value="52" id="skillCastAnimation" type="number">
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div id="siteContainer" style="height: calc(100vh - 20px); width: calc(100vw - 20px); overflow: hidden; padding: 10px;">
+            <h1 style="text-align: center;">Action Sequence Editor</h1>
+            <h2 style="text-align: center;">by SergeofBIBEK</h2>
+            <h2 id="projectName" style="position: absolute; top: 60px;"></h2>
+            <div id="codeMirrorHolder" style="height: 77vh; border: 1px solid black;"></div>
+            <div id="supportTheDeveloper">
+                <p style="text-align: center;">Support The Developer?</p>
+                <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                    <input type="hidden" name="cmd" value="_s-xclick">
+                    <input type="hidden" name="hosted_button_id" value="PVGPVVPNV8F3Y">
+                    <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+                    <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+                </form>
+            </div>
+            <div id="dragMe" style="display:none;"><p id="description">Drag, Resize, Snap!</p><div style="position: absolute; height: 100%; width: 100%; z-index: 2000;"></div><iframe src="" id="previewHolder" ondrag="console.log(event);"></iframe></div>
+            <div id="ghostpane" style="display: none;"></div>
+        </div>
+        <script src="share.js"></script>
+        <script src="move.js"></script>
+    </body>
+</html>

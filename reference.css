@@ -1,0 +1,120 @@
+body
+{
+    margin: 0px;
+    padding: 0px;
+    overflow: hidden;
+}
+
+#topNav
+{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    height: 50px;
+    z-index: 500;
+    background-color: #B33771;
+    outline: 1px solid white;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    font-size: 16px;
+}
+
+.topNavItem
+{
+    background-color: #B33771;
+    color: white;
+    padding: 0px 10px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    font-family: fantasy;
+    font-size: 10px;
+}
+
+.topNavItem:hover
+{
+    background-color: #6D214F;
+}
+
+.infoPanes
+{
+    margin-top: 50px;
+    position: absolute;
+    height: calc(100% - 50px);
+    width: 100%;
+    overflow: scroll;
+}
+
+.paneTitle 
+{
+    font-size: 25px;
+    text-align: center;
+    padding: 15px;
+    background-color: #B33771;
+    color: white;
+    font-family: fantasy;
+}
+
+.commandTitle 
+{
+    text-align: center;
+    background-color: #6D214F;
+    color: white;
+    padding: 10px 0px;
+    font-family: monospace;
+}
+
+.commandDescription 
+{
+    text-align: center;
+    background-color: #2C3A47;
+    color: white;
+    padding: 10px 10px;
+    font-family: sans-serif;
+}
+
+.commandExample {
+    padding: 10px 0px;
+    background-color: #58ada4;
+    color: white;
+    text-align: center;
+    font-family: monospace;
+}
+
+.hidden
+{
+    display: none;
+}
+
+.target, .stat
+{
+    text-decoration: underline;
+}
+
+.target:hover, .stat:hover
+{
+    color: red;
+}
+
+#targetsPane
+{
+    position: absolute;
+    background-color: white;
+    width: 460px;
+    padding: 10px;
+    left: 0px;
+    right: 0px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.boldTarget
+{
+    font-family: monospace;
+    font-weight: bold;
+    color: red;
+}

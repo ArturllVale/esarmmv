@@ -1,6 +1,7 @@
 var preHolder = document.getElementById("previewHolder");
 var autoComplete = true;
-var defaultCode = "<setup action>\n" +
+var defaultCode = 
+	"<setup action>\n" +
     "  clear battle log\n" +
     "  display action\n" +
     "  immortal: targets, true\n" +

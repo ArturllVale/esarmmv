@@ -1,8 +1,11 @@
 /* BASICS */
 
+@import url('https://fonts.googleapis.com/css?family=Source+Code+Pro&display=swap');
+
 .CodeMirror {
   /* Set height, width, borders, and global font properties here */
-  font-family: monospace;
+  font-family: 'Source Code Pro', monospace;
+  font-size: 14px;
   height: 100%;
   color: black;
 }

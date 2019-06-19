@@ -8,9 +8,12 @@
         <link rel="apple-touch-icon" href="icon/icon.png">
         <link rel="stylesheet" type="text/css" href="fonts/gamefont.css">
         <title>Editor de Sequências de Ações</title>
-
-        <script type="text/javascript" src="fbli.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		
+         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+		<script src='http://ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.min.js'></script>
+		<script src='http://cdnjs.cloudflare.com/ajax/libs/bower-angular-translate/2.5.2/angular-translate.min.js'></script>
+		<script  src="script.js"></script>
         <link rel="stylesheet" href="cmlib/lib/codemirror.css">
         <link rel="stylesheet" href="cmlib/addon/hint/show-hint.css">
         <link rel="stylesheet" href="cmlib/addon/scroll/simplescrollbars.css">
@@ -90,8 +93,9 @@
         <link rel="stylesheet" href="cmlib/theme/zenburn.css">
     </head>
     <body style="margin: 0px; font-size: 12px;">
+	<div class="container"  ng-app="myApp" ng-controller="Ctrl"> 
         <div id="sideNav" class="sidenav">
-            <div id="sideNavTitle">Referência de Action Sequence</div>
+            <div id="sideNavTitle">{{ 'HEADER' | translate }}</div>
             <div class="closebtn sideItem" onclick="closeNav();">&times;</div>
             <iframe class="infoBar" src="reference.html"></iframe>
         </div>
@@ -99,7 +103,7 @@
             <div class="dropdown">
                 <div class="dropdown-label">Editor</div>
                 <div class="dropdown-content">
-                    <label class="dropdown-item">Tema:
+                    <label class="dropdown-item">{{ 'TEMA' | translate }}
                         <select id="themeSelector" onchange="changeTheme()">
                             <option value="serge-light">Light</option>
                             <option value="serge-dark">Dark</option>
@@ -153,84 +157,93 @@
                             <option value="zenburn">zenburn</option>
                         </select>
                     </label>
-                    <div class="dropdown-item" onclick="toggleFullscreen();">Editor Fullscreen</div>
-                    <div class="dropdown-item" onclick="resetEditor();">Resetar Posição</div>
-                    <div class="dropdown-item" onclick="clearEditor();">Limpar Conteúdo</div>
-                    <div class="dropdown-item" onclick="toggleAutoComplete(this);">Desativar Auto Repetição</div>
+                    <div class="dropdown-item" onclick="toggleFullscreen();">{{ 'SCREEN' | translate }}</div>
+                    <div class="dropdown-item" onclick="resetEditor();">{{ 'POSITION' | translate }}</div>
+                    <div class="dropdown-item" onclick="clearEditor();">{{ 'CLEAR' | translate }}</div>
+                    <div class="dropdown-item" onclick="toggleAutoComplete(this);">{{ 'DISABLE' | translate }}</div>
                 </div>
             </div>
             <div class="dropdown">
-                <div class="dropdown-label">Visualizar</div>
+                <div class="dropdown-label">{{ 'VIEW' | translate }}</div>
                 <div class="dropdown-content">
-                    <div id="openPreviewButton" class="dropdown-item" onclick="previewHandler();">Abrir Visualização</div>
-                    <div id="closePreviewButton" class="dropdown-item" onclick="closePreview();" style="display: none">Fechar Visualização</div>
-                    <label class="dropdown-item">Volume do Efeito de Fundo
+                    <div id="openPreviewButton" class="dropdown-item" onclick="previewHandler();">{{ 'OPENVIEW' | translate }}</div>
+                    <div id="closePreviewButton" class="dropdown-item" onclick="closePreview();" style="display: none">{{ 'CLOSEVIEW' | translate }}</div>
+                    <label class="dropdown-item">{{ 'BGMA' | translate }}
                         <input id="bgmVol" type="range" step="10" max="100" min="0" onchange="volumeHandler();">
                     </label>
-                    <label class="dropdown-item">Volume do Efeitos Sonoros
+                    <label class="dropdown-item">{{ 'BGMB' | translate }}
                         <input id="seVol" type="range" step="10" max="100" min="0" onchange="volumeHandler();">
                     </label>
-                    <label class="dropdown-item">Volume do Efeito de Musica
+                    <label class="dropdown-item">{{ 'BGMC' | translate }}
                         <input id="meVol" type="range" step="10" max="100" min="0" onchange="volumeHandler();">
                     </label>
-                    <label class="dropdown-item">Volume do Som de Fundo
+                    <label class="dropdown-item">{{ 'BGMD' | translate }}
                         <input id="bgsVol" type="range" step="10" max="100" min="0" onchange="volumeHandler();">
                     </label>
                 </div>
             </div>
             <div class="dropdown" id="skillDropdown">
-                <div class="dropdown-label">Habilidades</div>
+                <div class="dropdown-label">{{ 'SKILLS' | translate }}</div>
                 <div class="dropdown-content">
-                    <label class="dropdown-item">Escopo
+                    <label class="dropdown-item">{{ 'SCOPE' | translate }}
                         <select onchange="updateSkillSettings(true);" id="skillScope">
-                            <option value="0">Ninguém</option>
-                            <option value="1" selected>1 Inimigo</option>
-                            <option value="2">Todos os Inimigos</option>
-                            <option value="3">1 Inimigo Aleatório</option>
-                            <option value="4">2 Inimigos Aleatórios</option>
-                            <option value="5">3 Inimigos Aleatórios</option>
-                            <option value="6">4 Inimigos Aleatórios</option>
-                            <option value="7">1 Aliado</option>
-                            <option value="8">Todos os Aliados</option>
-                            <option value="9">1 Aliado (Morto)</option>
-                            <option value="10">Todos os Aliados (Mortos)</option>
-                            <option value="11">O Usuário</option>
+                            <option value="0">{{ 'SCOPEA' | translate }}</option>
+                            <option value="1" selected>{{ 'SCOPEB' | translate }}</option>
+                            <option value="2">{{ 'SCOPEC' | translate }}</option>
+                            <option value="3">{{ 'SCOPED' | translate }}</option>
+                            <option value="4">{{ 'SCOPEE' | translate }}</option>
+                            <option value="5">{{ 'SCOPEF' | translate }}</option>
+                            <option value="6">{{ 'SCOPEG' | translate }}</option>
+                            <option value="7">{{ 'SCOPEH' | translate }}</option>
+                            <option value="8">{{ 'SCOPEI' | translate }}</option>
+                            <option value="9">{{ 'SCOPEJ' | translate }}</option>
+                            <option value="10">{{ 'SCOPEL' | translate }}</option>
+                            <option value="11">{{ 'SCOPEM' | translate }}</option>
                         </select>
                     </label>
-                    <label class="dropdown-item">Tipo de Dano
+                    <label class="dropdown-item">{{ 'DAMAGE' | translate }}
                         <select onchange="updateSkillSettings(true);" id="skillDamageType">
-                            <option value="0">Nenhum</option>
-                            <option value="1" selected>Dano no HP</option>
-                            <option value="2">Dano no MP</option>
-                            <option value="3">Recuperação de HP</option>
-                            <option value="4">Recuperação de MP</option>
-                            <option value="5">Drenar HP</option>
-                            <option value="6">Drenar MP</option>
+                            <option value="0">{{ 'DAMAGEA' | translate }}</option>
+                            <option value="1" selected>{{ 'DAMAGEB' | translate }}</option>
+                            <option value="2">{{ 'DAMAGEC' | translate }}</option>
+                            <option value="3">{{ 'DAMAGED' | translate }}</option>
+                            <option value="4">{{ 'DAMAGEE' | translate }}</option>
+                            <option value="5">{{ 'DAMAGEF' | translate }}</option>
+                            <option value="6">{{ 'DAMAGEG' | translate }}</option>
                         </select>
                     </label>
-                    <label class="dropdown-item">ID da Animação
+                    <label class="dropdown-item">{{ 'ANIID' | translate }}
                         <input value="-1" onchange="updateSkillSettings(true);" id="skillAnimation" type="number">
                     </label>
-                    <label class="dropdown-item">ID da Animação de Conjuração
+                    <label class="dropdown-item">{{ 'ANIIDB' | translate }}
                         <input value="52" onchange="updateSkillSettings(true);" id="skillCastAnimation" type="number">
                     </label>
                 </div>
             </div>
             <div class="dropdown">
-                <div class="dropdown-label">Referencias</div>
+                <div class="dropdown-label">{{ 'REF' | translate }}</div>
                 <div class="dropdown-content">
-                    <div class="dropdown-item" id="openNavButton" onclick="openNav();">Abrir</div>
-                    <div class="dropdown-item" style="display: none;" id="closeNavButton" onclick="closeNav();">Fechar</div>
+                    <div class="dropdown-item" id="openNavButton" onclick="openNav();">{{ 'REFA' | translate }}</div>
+                    <div class="dropdown-item" style="display: none;" id="closeNavButton" onclick="closeNav();">{{ 'REFB' | translate }}</div>
                     
                 </div>
                 
             </div>
+		 <div class="dropdown">
+                <div class="dropdown-label">Translate</div>
+                <div class="dropdown-content">
+                    <label class="dropdown-item" ng-click="changeLanguage('it')" class="active">{{ 'BUTTON_LANG_IT' | translate }}</label> 
+					<label class="dropdown-item" ng-click="changeLanguage('en')"  class="active">{{ 'BUTTON_LANG_EN' | translate }}</label>  
+                </div> 
+                
+           </div> 
+			
             
         </div>
         <div id="siteContainer" style="padding: 10px;">
-            <h1 style="text-align: center; color: #58ada4">Editor de Sequências de Ações</h1>
-            <h2 id="projectName" style="position: absolute; top: 40px; color: #58ada4">Faça sua Sequência aqui</h2>
-            <div id="codeMirrorHolder"><p id="description" style="color: white">Editor de Sequências</p></div>
+            <h1 style="text-align: center; color: #58ada4">{{ 'HEADER' | translate }}</h1>
+            <h2 id="projectName" style="position: absolute; top: 40px; color: #58ada4">{{ 'SUBHEAD' | translate }}</h2>
+            <div id="codeMirrorHolder"><p id="description" style="color: white">{{ 'EDITOR' | translate }}</p></div>
             <!-- <div id="supportTheDeveloper">
                 <p style="text-align: center;">Quer ajudar o desenvolvedor?</p>
                 <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
@@ -241,11 +254,15 @@
                 </form>
             </div> -->
             <div id="shareModal" style="display: none;"><input type="button" value="Close" style="position: absolute; top:15px; right: 25px; font-size: 25px;" onclick="document.getElementById('shareModal').style.display = 'none';"><div id="shareContent"></div> </div>
-            <div id="dragMe" style="display:none;"><p id="description2">Arraste, Redimensione, Encaixe!</p><div style="position: absolute; height: 100%; width: 100%; z-index: 2000;"></div><iframe src="" id="previewHolder" ondrag="console.log(event);"></iframe></div>
+            <div id="dragMe" style="display:none;"><p id="description2">{{ 'RESIZE' | translate }}</p><div style="position: absolute; height: 100%; width: 100%; z-index: 2000;"></div><iframe src="" id="previewHolder" ondrag="console.log(event);"></iframe></div>
             <div id="ghostpane" style="display: none;"></div>
             <div id="ghostpane2"></div>
         </div>
+		</div>
+		<p class="copy">by SergeofBIBEK</div>
+		
         <script src="main.js"></script>
         <script src="move.js"></script>
+		
     </body>
 </html>

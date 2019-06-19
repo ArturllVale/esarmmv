@@ -5,6 +5,13 @@ body {
     font-size: 14px;
 }
 
+.copy {
+	text-align: right;
+	margin-top: -60px;
+	padding-right: 10px;
+	color: #FF0000;
+}
+
 #supportTheDeveloper
 {
     position: absolute;
